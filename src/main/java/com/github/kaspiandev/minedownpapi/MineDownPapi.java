@@ -22,7 +22,7 @@ public final class MineDownPapi extends PlaceholderExpansion {
 
     @Override
     public @NotNull String getVersion() {
-        return "1";
+        return "1.1";
     }
 
     @Override
