@@ -12,7 +12,7 @@ public final class MineDownPapi extends PlaceholderExpansion {
 
     @Override
     public @NotNull String getIdentifier() {
-        return "minedown";
+        return "minedownpapi";
     }
 
     @Override
