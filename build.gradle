@@ -1,0 +1,51 @@
+plugins {
+    id "java"
+    id "maven-publish"
+    id "com.github.johnrengelman.shadow" version "8.1.1"
+}
+
+group = "com.github.kaspiandev.minedownpapi"
+version = "1"
+
+repositories {
+    mavenCentral()
+    maven {
+        name = "spigotmc-repo"
+        url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
+    }
+    maven {
+        name = "sonatype"
+        url = "https://oss.sonatype.org/content/groups/public/"
+    }
+    maven {
+        name = "placeholderapi"
+        url = "https://repo.extendedclip.com/content/repositories/placeholderapi"
+    }
+    maven {
+        name = "minedown"
+        url = "https://repo.minebench.de/"
+    }
+}
+
+dependencies {
+    compileOnly "org.spigotmc:spigot-api:1.19.4-R0.1-SNAPSHOT"
+    compileOnly "me.clip:placeholderapi:2.11.3"
+
+    implementation "de.themoep:minedown:1.7.1-SNAPSHOT"
+}
+
+shadowJar {
+    archiveClassifier = null
+
+    relocate("de.themoep.minedown", "com.github.kaspiandev.minedownpapi.lib.minedown")
+}
+
+publishing {
+    publications {
+        placeholderapi(MavenPublication) { publication ->
+            project.shadow.component(publication)
+        }
+    }
+}
+
+tasks.build.dependsOn("shadowJar")
